@@ -4,10 +4,8 @@
 
 import * as serverEntry from "./app/entry.server.tsx";
 import * as route0 from "./app/root.tsx";
-import * as route1 from "./app/routes/about_.another.tsx";
-import * as route2 from "./app/routes/about.test.tsx";
-import * as route3 from "./app/routes/index.tsx";
-import * as route4 from "./app/routes/about.tsx";
+import * as route1 from "./app/routes/index.tsx";
+import * as route2 from "./app/routes/$slug.tsx";
 
 export const entry = { module: serverEntry };
 export const routes = {
@@ -16,33 +14,19 @@ export const routes = {
 		module: route0,
 		file: "./app/root.tsx",
 	},
-	"routes/about_/another": {
-		id: "routes/about_/another",
-		path: "about/another",
-		parentId: "root",
-		module: route1,
-		file: "./app/routes/about_.another.tsx",
-	},
-	"routes/about/test": {
-		id: "routes/about/test",
-		path: "test",
-		parentId: "routes/about",
-		module: route2,
-		file: "./app/routes/about.test.tsx",
-	},
 	"routes/index": {
 		id: "routes/index",
 		index: true,
 		parentId: "root",
-		module: route3,
+		module: route1,
 		file: "./app/routes/index.tsx",
 	},
-	"routes/about": {
-		id: "routes/about",
-		path: "about",
+	"routes/$slug": {
+		id: "routes/$slug",
+		path: ":slug",
 		parentId: "root",
-		module: route4,
-		file: "./app/routes/about.tsx",
+		module: route2,
+		file: "./app/routes/$slug.tsx",
 	},
 };
 export const assets = {
@@ -57,49 +41,27 @@ export const assets = {
 			hasCatchBoundary: "CatchBoundary" in route0,
 			hasErrorBoundary: "ErrorBoundary" in route0,
 		},
-			"routes/about_/another": {
-			id: "routes/about_/another",
-			path: "about/another",
-			parentId: "root",
-			imports: [],
-			module: "/routes/about_/another.js",
-			hasAction: "action" in route1,
-			hasLoader: "loader" in route1,
-			hasCatchBoundary: "CatchBoundary" in route1,
-			hasErrorBoundary: "ErrorBoundary" in route1,
-		},
-			"routes/about/test": {
-			id: "routes/about/test",
-			path: "test",
-			parentId: "routes/about",
-			imports: [],
-			module: "/routes/about/test.js",
-			hasAction: "action" in route2,
-			hasLoader: "loader" in route2,
-			hasCatchBoundary: "CatchBoundary" in route2,
-			hasErrorBoundary: "ErrorBoundary" in route2,
-		},
 			"routes/index": {
 			id: "routes/index",
 			index: true,
 			parentId: "root",
 			imports: [],
 			module: "/routes/index.js",
-			hasAction: "action" in route3,
-			hasLoader: "loader" in route3,
-			hasCatchBoundary: "CatchBoundary" in route3,
-			hasErrorBoundary: "ErrorBoundary" in route3,
+			hasAction: "action" in route1,
+			hasLoader: "loader" in route1,
+			hasCatchBoundary: "CatchBoundary" in route1,
+			hasErrorBoundary: "ErrorBoundary" in route1,
 		},
-			"routes/about": {
-			id: "routes/about",
-			path: "about",
+			"routes/$slug": {
+			id: "routes/$slug",
+			path: ":slug",
 			parentId: "root",
 			imports: [],
-			module: "/routes/about.js",
-			hasAction: "action" in route4,
-			hasLoader: "loader" in route4,
-			hasCatchBoundary: "CatchBoundary" in route4,
-			hasErrorBoundary: "ErrorBoundary" in route4,
+			module: "/routes/$slug.js",
+			hasAction: "action" in route2,
+			hasLoader: "loader" in route2,
+			hasCatchBoundary: "CatchBoundary" in route2,
+			hasErrorBoundary: "ErrorBoundary" in route2,
 		},		
 },
 };

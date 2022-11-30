@@ -21,8 +21,9 @@ export default function App() {
         <Meta />
         <Links />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
       </head>
-      <body>
+      <body class="bg-blue-100 p-4 md:p-12">
         <Outlet />
         <ScrollRestoration />
         <Scripts />

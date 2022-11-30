@@ -1,39 +1,34 @@
-import { useCallback, useState } from "react";
 import { type LoaderArgs, json } from "@remix-run/deno";
 import { Link, useLoaderData } from "@remix-run/react";
+import groq from "groq";
 
-import { useReward } from "react-rewards";
-import { throttle } from "~/utils.ts";
+import { client } from "~/sanity/client.tsx";
 
-export function loader({}: LoaderArgs) {
-  return json({ message: "Hello from Remix on Deno!" });
+export async function loader({}: LoaderArgs) {
+  const articles = await client.fetch(
+    groq`*[_type == "article" && defined(slug.current) && unlisted != true]|order(published desc)`
+  );
+
+  return json({ articles: articles ?? [] });
 }
 
 export default function Index() {
-  const { message } = useLoaderData<typeof loader>();
-  const [count, setCount] = useState(0);
-
-  const { reward } = useReward("rewardId", "balloons");
-  const debouncedReward = useCallback(throttle(reward, 1000), [reward]);
+  const { articles } = useLoaderData<typeof loader>();
 
   return (
-    <main>
-      <h1>{message}</h1>
-      <p>
-        <Link to="/about">About</Link>
-      </p>
-      <p>
-        <button
-          onClick={(event) => {
-            setCount(count + 1);
-            debouncedReward();
-          }}
-        >
-          <span id="rewardId" />
-          Increment
-        </button>{" "}
-        <span>Count: {count}</span>
-      </p>
+    <main class="container mx-auto bg-white p-4 md:p-12 prose prose-blue">
+      <h1>Articles</h1>
+      {articles?.length > 0 ? (
+        <ul>
+          {articles.map((article) => (
+            <li key={article._id}>
+              <Link to={`/${article.slug.current}`}>{article.title}</Link>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No articles found</p>
+      )}
     </main>
   );
 }

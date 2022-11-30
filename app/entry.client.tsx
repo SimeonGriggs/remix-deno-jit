@@ -3,7 +3,7 @@ import { RemixBrowser } from "@remix-run/react";
 
 if (process.env.NODE_ENV === "development") {
   import(
-    "https://esm.sh/stable/preact@10.10.6/deno/devtools.development.js"
+    "https://esm.sh/stable/preact@10.11.3/deno/devtools.development.js"
   ).then(start);
 } else {
   start();

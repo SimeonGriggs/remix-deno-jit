@@ -1,7 +1,10 @@
 {
   "tasks": {
     "start": "deno run --allow-net --allow-read --allow-env --allow-run --allow-write main.ts",
-    "dev": "deno run --import-map import_map_dev.json --allow-net --allow-read --allow-env --allow-run --allow-write dev.ts",
+    "dev:remix": "deno run --import-map import_map_dev.json --allow-net --allow-read --allow-env --allow-run --allow-write dev.ts",
+    "dev:css": "npx tailwindcss-cli@latest build -c tailwind.config.js -i app/styles/input.css -o public/styles/output.css --minify",
+    "dev:both": "deno task dev:css & deno task dev:remix",
+    "dev": "deno task dev:remix",
     "prepare": "deno run --allow-read --allow-write --allow-env cli.ts prepare"
   },
   "importMap": "import_map.json",
