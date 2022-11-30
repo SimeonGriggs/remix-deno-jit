@@ -9,8 +9,7 @@ import {
 } from "@remix-run/react";
 
 export const meta: MetaFunction = () => ({
-  title: "Remix",
-  description: "Welcome to Remix on Deno!",
+  title: "Sanity Client in Remix with Preact on Deno!",
   viewport: "width=device-width, initial-scale=1",
 });
 

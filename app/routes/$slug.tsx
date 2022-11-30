@@ -1,11 +1,16 @@
-import { useCallback, useState } from "react";
-import { type LoaderArgs, json } from "@remix-run/deno";
+import { type LoaderArgs, json, MetaFunction } from "@remix-run/deno";
 import { Link, useLoaderData } from "@remix-run/react";
 import type { SanityImageSource } from "@sanity/asset-utils";
 import imageUrlBuilder from "@sanity/image-url";
 import groq from "groq";
 
 import { config, client } from "~/sanity/client.tsx";
+
+export const meta: MetaFunction = ({data}) => ({
+  title: data?.article?.title ?? `Untitled`,
+  description: data?.article?.summary ?? ``,
+  viewport: "width=device-width, initial-scale=1",
+});
 
 export const urlFor = (source: SanityImageSource) =>
   imageUrlBuilder(config).image(source);
